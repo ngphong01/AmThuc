@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thực Đơn | Fusion Á-Âu</title>
+    <meta
+      name="description"
+      content="Khám phá thực đơn đa dạng với các món ăn fusion độc đáo tại nhà hàng Fusion Á-Âu"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <style>
+      /* Animation Classes */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .fade-in.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .slide-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .slide-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .slide-in-left.active,
+      .slide-in-right.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scale-in {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .scale-in.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Food Animation */
+      @keyframes plateAppear {
+        0% {
+          opacity: 0;
+          transform: translateY(30px) scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes menuItemHighlight {
+        0% {
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        50% {
+          box-shadow: 0 8px 25px rgba(255, 152, 0, 0.2);
+        }
+        100% {
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+      }
+
+      /* Enhanced Styles */
+      .page-banner {
+        position: relative;
+        height: 500px;
+        background-image: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .page-banner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+      }
+
+      .banner-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .banner-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .banner-content p {
+        font-size: 1.5rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      .section-title {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: #ff9800;
+      }
+
+      .featured-menu {
+        padding: 100px 0;
+        background-color: #fff;
+      }
+
+      .menu-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .menu-item.featured {
+        display: flex;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
+      }
+
+      .menu-item.featured:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .menu-item-image {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .menu-item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .menu-item.featured:hover .menu-item-image img {
+        transform: scale(1.1);
+      }
+
+      .menu-item-content {
+        flex: 1;
+        padding: 30px;
+      }
+
+      .menu-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      .menu-item-title {
+        font-size: 1.8rem;
+        margin: 0;
+        color: #333;
+      }
+
+      .menu-item-price {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ff9800;
+        background-color: rgba(255, 152, 0, 0.1);
+        padding: 5px 15px;
+        border-radius: 20px;
+      }
+
+      .menu-item-description {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .menu-item-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 25px;
+      }
+
+      .menu-item-features li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 10px;
+      }
+
+      .menu-item-features li::before {
+        content: "\f00c";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        color: #ff9800;
+      }
+
+      .menu-section {
+        padding: 100px 0;
+        background-color: #f9f9f9;
+      }
+
+      .menu-tabs {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 50px;
+      }
+
+      .menu-tab {
+        padding: 12px 25px;
+        background-color: #fff;
+        border: none;
+        border-radius: 30px;
+        font-family: "Poppins", sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .menu-tab.active,
+      .menu-tab:hover {
+        background-color: #ff9800;
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 152, 0, 0.3);
+      }
+
+      .menu-category {
+        display: none;
+      }
+
+      .menu-category.active {
+        display: block;
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .menu-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .menu-item {
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .menu-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .special-menu {
+        padding: 100px 0;
+        background-color: #fff;
+      }
+
+      .special-menu-content {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        padding: 0;
+      }
+
+      .special-menu-text {
+        flex: 1;
+        padding: 40px;
+      }
+
+      .special-menu-text h3 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .special-menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 25px 0;
+      }
+
+      .special-menu-list li {
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 15px;
+      }
+
+      .special-menu-list li::before {
+        content: "\f058";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        color: #ff9800;
+      }
+
+      .special-price {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #ff9800;
+        margin: 25px 0 15px;
+      }
+
+      .special-note {
+        font-style: italic;
+        color: #666;
+        margin-bottom: 25px;
+      }
+
+      .special-menu-image {
+        flex: 1;
+        height: 500px;
+        overflow: hidden;
+      }
+
+      .special-menu-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .special-menu-content:hover .special-menu-image img {
+        transform: scale(1.05);
+      }
+
+      .booking-cta {
+        padding: 80px 0;
+        background-color: #ff9800;
+        color: #fff;
+        text-align: center;
+      }
+
+      .booking-cta .section-title {
+        color: #fff;
+      }
+
+      .booking-cta .section-title::after {
+        background-color: #fff;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .btn-primary {
+        background-color: #ff9800;
+        color: #fff;
+        border-color: #ff9800;
+      }
+
+      .btn-primary:hover {
+        background-color: transparent;
+        color: #ff9800;
+      }
+
+      .btn-light {
+        background-color: #fff;
+        color: #ff9800;
+        border-color: #fff;
+      }
+
+      .btn-light:hover {
+        background-color: transparent;
+        color: #fff;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 992px) {
+        .menu-item.featured {
+          flex-direction: column;
+        }
+
+        .special-menu-content {
+          flex-direction: column;
+        }
+
+        .special-menu-image {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .banner-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .menu-items {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <a href="index.html" class="logo">
+            <img
+              src="https://images-platform.99static.com//Fwob5Bx1GaA6HyyTe-pkVECKtGU=/0x0:1150x1150/fit-in/500x500/99designs-contests-attachments/152/152737/attachment_152737834"
+              alt="Fusion Á-Âu Logo"
+              width="90"
+              height="auto"
+              class="logo-img"
+            />
+          </a>
+
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">Trang Chủ</a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">Về Chúng Tôi</a>
+            </li>
+            <li class="nav-item">
+              <a href="menu.html" class="nav-link active">Thực Đơn</a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">Liên Hệ</a>
+            </li>
+          </ul>
+
+          <button class="mobile-toggle" aria-label="Toggle menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+      <ul class="mobile-nav">
+        <li class="mobile-item">
+          <a href="index.html" class="mobile-link">Trang Chủ</a>
+        </li>
+        <li class="mobile-item">
+          <a href="about.html" class="mobile-link">Về Chúng Tôi</a>
+        </li>
+        <li class="mobile-item">
+          <a href="menu.html" class="mobile-link">Thực Đơn</a>
+        </li>
+        <li class="mobile-item">
+          <a href="contact.html" class="mobile-link">Liên Hệ</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+      <div class="banner-overlay"></div>
+      <div class="container">
+        <div class="banner-content animate__animated animate__fadeIn">
+          <h1>Thực Đơn</h1>
+          <p>Khám phá hương vị độc đáo của ẩm thực Fusion Á-Âu</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Menu Section -->
+    <section class="featured-menu section-padding">
+      <div class="container">
+        <h2 class="section-title fade-in">Món Ăn Nổi Bật</h2>
+
+        <div class="menu-grid">
+          <div
+            class="menu-item featured slide-in-left"
+            style="animation-delay: 0.2s"
+          >
+            <div class="menu-item-image">
+              <img
+                src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+                alt="Bò Wellington Lá Sen"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Bò Wellington Lá Sen</h3>
+                <span class="menu-item-price">450.000đ</span>
+              </div>
+              <p class="menu-item-description">
+                Món fusion đẳng cấp kết hợp giữa kỹ thuật Âu và hương vị Á Đông.
+                Thăn bò Úc thượng hạng được bọc trong lá sen thơm ngát thay cho
+                pastry truyền thống.
+              </p>
+              <ul class="menu-item-features">
+                <li>Thăn bò Úc bọc lá sen</li>
+                <li>Nấm pate và rau thơm</li>
+                <li>Sốt rượu vang đỏ pha nước mắm</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="menu-item featured slide-in-right"
+            style="animation-delay: 0.4s"
+          >
+            <div class="menu-item-image">
+              <img
+                src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                alt="Cá Hồi Miso"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Cá Hồi Miso</h3>
+                <span class="menu-item-price">380.000đ</span>
+              </div>
+              <p class="menu-item-description">
+                Cá hồi Na Uy tươi ngon được ướp với miso Nhật Bản và các loại
+                gia vị Việt Nam, nướng trên than để lưu giữ độ mềm và ẩm tự
+                nhiên.
+              </p>
+              <ul class="menu-item-features">
+                <li>Cá hồi Na Uy tươi ngon</li>
+                <li>Ướp miso và xả, gừng</li>
+                <li>Phục vụ với cơm gạo lứt</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="menu-item featured slide-in-left"
+            style="animation-delay: 0.6s"
+          >
+            <div class="menu-item-image">
+              <img
+                src="https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
+                alt="Tiramisu Cà Phê Việt"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Tiramisu Cà Phê Việt</h3>
+                <span class="menu-item-price">140.000đ</span>
+              </div>
+              <p class="menu-item-description">
+                Một phiên bản độc đáo của món tráng miệng Ý nổi tiếng, được nâng
+                tầm với hương vị cà phê phin Việt Nam đậm đà.
+              </p>
+              <ul class="menu-item-features">
+                <li>Cà phê phin Việt Nam</li>
+                <li>Kem Mascarpone Ý</li>
+                <li>Bánh Savoiardi nhúng rượu rum</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section section-padding bg-light">
+      <div class="container">
+        <h2 class="section-title fade-in">Thực Đơn Đầy Đủ</h2>
+
+        <div class="menu-tabs fade-in">
+          <button class="menu-tab active" data-category="khai-vi">
+            Khai Vị
+          </button>
+          <button class="menu-tab" data-category="mon-chinh">Món Chính</button>
+          <button class="menu-tab" data-category="trang-mieng">
+            Tráng Miệng
+          </button>
+          <button class="menu-tab" data-category="do-uong">Đồ Uống</button>
+        </div>
+
+        <div class="menu-content">
+          <!-- Khai Vị -->
+          <div id="khai-vi" class="menu-category active">
+            <div class="menu-items">
+              <div class="menu-item plate-animation">
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Gỏi Cuốn Tôm Thịt</h3>
+                    <span class="menu-item-price">120.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Gỏi cuốn tươi với tôm, thịt heo, bún, rau thơm và sốt đậu
+                    phộng
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="menu-item plate-animation"
+                style="animation-delay: 0.2s"
+              >
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Bruschetta Fusion</h3>
+                    <span class="menu-item-price">150.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Bánh mì nướng giòn với cà chua, húng quế, phô mai và rau răm
+                    Việt Nam
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="menu-item plate-animation"
+                style="animation-delay: 0.4s"
+              >
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Súp Nấm Truffle</h3>
+                    <span class="menu-item-price">180.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Súp kem nấm với dầu truffle và bánh mì nướng tỏi
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Món Chính -->
+          <div id="mon-chinh" class="menu-category">
+            <div class="menu-items">
+              <div class="menu-item plate-animation">
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Bò Wellington Lá Sen</h3>
+                    <span class="menu-item-price">450.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Thăn bò Úc bọc nấm và lá sen, nướng chín tới, phục vụ kèm
+                    khoai tây nghiền và sốt rượu vang đỏ
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="menu-item plate-animation"
+                style="animation-delay: 0.2s"
+              >
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Cá Hồi Miso</h3>
+                    <span class="menu-item-price">380.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Cá hồi Na Uy ướp miso, nướng trên than, phục vụ với cơm gạo
+                    lứt và rau củ theo mùa
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="menu-item plate-animation"
+                style="animation-delay: 0.4s"
+              >
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Risotto Nấm Truffle</h3>
+                    <span class="menu-item-price">320.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Cơm Ý nấu với nấm rừng, phô mai Parmesan và dầu truffle
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tráng Miệng -->
+          <div id="trang-mieng" class="menu-category">
+            <div class="menu-items">
+              <div class="menu-item plate-animation">
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Panna Cotta Trà Xanh</h3>
+                    <span class="menu-item-price">120.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Bánh panna cotta hương trà xanh Nhật Bản, phục vụ với sốt
+                    mứt dâu tây
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="menu-item plate-animation"
+                style="animation-delay: 0.2s"
+              >
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Tiramisu Cà Phê Việt</h3>
+                    <span class="menu-item-price">140.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Bánh tiramisu truyền thống với twist từ cà phê phin Việt Nam
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="menu-item plate-animation"
+                style="animation-delay: 0.4s"
+              >
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Chocolate Fondant Lá Dứa</h3>
+                    <span class="menu-item-price">160.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Bánh chocolate fondant với hương lá dứa, phục vụ với kem
+                    vanilla
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Đồ Uống -->
+          <div id="do-uong" class="menu-category">
+            <div class="menu-items">
+              <div class="menu-item plate-animation">
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Cocktail Chanh Sả</h3>
+                    <span class="menu-item-price">150.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Cocktail với vodka, sả, chanh, đường và soda - sự kết hợp
+                    tuyệt vời giữa Việt Nam và phương Tây
+                  </p>
+                </div>
+              </div>
+              <div
+                class="menu-item plate-animation"
+                style="animation-delay: 0.2s"
+              >
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Rượu Vang Đỏ</h3>
+                    <span class="menu-item-price">180.000đ/ly</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Tuyển chọn từ các vùng rượu vang nổi tiếng của Pháp, Ý và
+                    Chile
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="menu-item plate-animation"
+                style="animation-delay: 0.4s"
+              >
+                <div class="menu-item-content">
+                  <div class="menu-item-header">
+                    <h3 class="menu-item-title">Trà Sen Ủ Lạnh</h3>
+                    <span class="menu-item-price">90.000đ</span>
+                  </div>
+                  <p class="menu-item-description">
+                    Trà sen thơm lừng ủ lạnh 24 giờ, phục vụ với đá và lát chanh
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Special Menu Section -->
+    <section class="special-menu section-padding">
+      <div class="container">
+        <h2 class="section-title fade-in">Thực Đơn Đặc Biệt</h2>
+
+        <div class="special-menu-content scale-in">
+          <div class="special-menu-text">
+            <h3>Set Menu Fusion Á-Âu</h3>
+            <p>
+              Trải nghiệm hành trình ẩm thực trọn vẹn với set menu 6 món đặc sắc
+              của chúng tôi.
+            </p>
+
+            <h4>Set menu bao gồm:</h4>
+            <ul class="special-menu-list">
+              <li>Khai vị: Súp nấm truffle</li>
+              <li>Khai vị nhẹ: Gỏi cuốn tôm thịt hoặc Bruschetta Fusion</li>
+              <li>
+                Món chính: Lựa chọn từ Bò Wellington Lá Sen, Cá Hồi Miso hoặc
+                Risotto Nấm Truffle
+              </li>
+              <li>Tráng miệng: Lựa chọn bất kỳ từ menu tráng miệng</li>
+              <li>
+                Đồ uống: Ly rượu vang đỏ hoặc trắng, hoặc cocktail không cồn
+              </li>
+            </ul>
+
+            <div class="special-price">Giá: 750.000đ/người</div>
+            <p class="special-note">Áp dụng cho nhóm từ 2 người trở lên.</p>
+
+            <a href="#booking" class="btn btn-primary">Đặt Bàn Ngay</a>
+          </div>
+
+          <div class="special-menu-image">
+            <img
+              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              alt="Set Menu Fusion Á-Âu"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking CTA -->
+    <section id="booking" class="booking-cta section-padding bg-primary">
+      <div class="container">
+        <div class="cta-content text-center fade-in">
+          <h2 class="section-title light">Đặt Bàn Ngay</h2>
+          <p>
+            Đặt bàn trước để đảm bảo có chỗ và trải nghiệm ẩm thực tuyệt vời tại
+            Fusion Á-Âu.
+          </p>
+          <a href="contact.html#booking-form" class="btn btn-light">Đặt Bàn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img
+              src="images/fusion-bistro-logo-white.png"
+              alt="Fusion Á-Âu Logo"
+              class="footer-logo-img"
+            />
+            <p>Nơi giao thoa tinh hoa ẩm thực Á Đông và Châu Âu</p>
+          </div>
+
+          <div class="footer-links">
+            <h3 class="footer-title">Liên Kết</h3>
+            <ul class="footer-menu">
+              <li><a href="index.html">Trang Chủ</a></li>
+              <li><a href="about.html">Về Chúng Tôi</a></li>
+              <li><a href="menu.html">Thực Đơn</a></li>
+              <li><a href="contact.html">Liên Hệ</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-hours">
+            <h3 class="footer-title">Giờ Mở Cửa</h3>
+            <ul class="hours-list">
+              <li><span>Thứ 2 - Thứ 5:</span> 11:00 - 22:00</li>
+              <li><span>Thứ 6 - Thứ 7:</span> 11:00 - 23:00</li>
+              <li><span>Chủ Nhật:</span> 11:00 - 21:00</li>
+            </ul>
+          </div>
+
+          <div class="footer-contact">
+            <h3 class="footer-title">Thông Tin Liên Hệ</h3>
+            <ul class="contact-list">
+              <li>
+                <i class="fas fa-map-marker-alt"></i> Số 123 Đường ABC, Quận
+                XYZ, TP.HCM
+              </li>
+              <li><i class="fas fa-phone-alt"></i> (028) 1234 5678</li>
+              <li><i class="fas fa-envelope"></i> info@fusionadelights.com</li>
+            </ul>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="TripAdvisor"
+                ><i class="fab fa-tripadvisor"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2023 Fusion Á-Âu. Tất cả quyền được bảo lưu.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Menu Toggle
+      const menuToggle = document.querySelector(".mobile-toggle");
+      const mobileMenu = document.querySelector(".mobile-menu");
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener("click", function () {
+          menuToggle.classList.toggle("active");
+          mobileMenu.classList.toggle("active");
+        });
+      }
+
+      // Menu Tabs
+      const menuTabs = document.querySelectorAll(".menu-tab");
+      const menuCategories = document.querySelectorAll(".menu-category");
+
+      if (menuTabs.length > 0 && menuCategories.length > 0) {
+        menuTabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            // Remove active class from all tabs
+            menuTabs.forEach((t) => t.classList.remove("active"));
+
+            // Add active class to clicked tab
+            this.classList.add("active");
+
+            // Hide all categories
+            menuCategories.forEach((cat) => cat.classList.remove("active"));
+
+            // Show corresponding category
+            const category = this.getAttribute("data-category");
+            const activeCategory = document.getElementById(category);
+            if (activeCategory) {
+              activeCategory.classList.add("active");
+
+              // Apply plate animation to newly visible items
+              const plateItems =
+                activeCategory.querySelectorAll(".plate-animation");
+              plateItems.forEach((item, index) => {
+                item.style.animation = `plateAppear 0.5s ease forwards ${
+                  index * 0.1
+                }s`;
+              });
+            }
+          });
+        });
+      }
+
+      // Scroll Animation
+      const animateOnScroll = () => {
+        const elements = document.querySelectorAll(
+          ".fade-in, .slide-in-left, .slide-in-right, .scale-in"
+        );
+
+        elements.forEach((element) => {
+          const elementPosition = element.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.2;
+
+          if (elementPosition < screenPosition) {
+            element.classList.add("active");
+          }
+        });
+      };
+
+      // Apply plate animation to initial items
+      document.addEventListener("DOMContentLoaded", function () {
+        const initialPlateItems = document.querySelectorAll(
+          "#khai-vi .plate-animation"
+        );
+        initialPlateItems.forEach((item, index) => {
+          item.style.animation = `plateAppear 0.5s ease forwards ${
+            index * 0.1
+          }s`;
+        });
+
+        // Menu item hover effect
+        const menuItems = document.querySelectorAll(".menu-item");
+        menuItems.forEach((item) => {
+          item.addEventListener("mouseenter", function () {
+            this.style.animation = "menuItemHighlight 1.5s ease infinite";
+          });
+
+          item.addEventListener("mouseleave", function () {
+            this.style.animation = "";
+          });
+        });
+      });
+
+      // Run on load
+      window.addEventListener("load", animateOnScroll);
+      // Run on scroll
+      window.addEventListener("scroll", animateOnScroll);
+
+      // Parallax Effect for Banner
+      window.addEventListener("scroll", function () {
+        const banner = document.querySelector(".page-banner");
+        if (banner) {
+          const scrollPosition = window.pageYOffset;
+          banner.style.backgroundPositionY = scrollPosition * 0.5 + "px";
+        }
+      });
+    </script>
+  </body>
+</html>
