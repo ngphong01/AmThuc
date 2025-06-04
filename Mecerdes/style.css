@@ -1,0 +1,941 @@
+/* Mercedes-Benz Vietnam Website Styles */
+
+/* ===== BASE STYLES ===== */
+:root {
+    --primary: #00173d;         /* Mercedes-Benz deep blue */
+    --secondary: #00adef;       /* Mercedes-Benz light blue */
+    --accent: #eb0a1e;          /* Mercedes-Benz red */
+    --light: #ffffff;
+    --dark: #222222;
+    --gray: #f5f5f5;
+    --gray-dark: #666666;
+    --gray-medium: #999999;
+    --gray-light: #e0e0e0;
+    --shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --radius: 4px;
+    --font-primary: 'Arial', 'Helvetica', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%; /* 10px = 1rem */
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: var(--light);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+ul, ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    font-size: 3.6rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.section-subtitle {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--gray-dark);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--light);
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 4rem;
+    z-index: 1010;
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--primary);
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-link i {
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--secondary);
+}
+
+.nav-link:hover i {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--light);
+    min-width: 200px;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    z-index: 1001;
+}
+
+.dropdown-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dropdown-menu a {
+    color: var(--primary);
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    color: var(--secondary);
+}
+
+.nav-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--light);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    z-index: 1001;
+}
+
+.mega-menu-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    padding: 3rem 0;
+}
+
+.mega-column h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.mega-column ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mega-column a {
+    color: var(--gray-dark);
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.mega-column a:hover {
+    color: var(--secondary);
+    padding-left: 0.5rem;
+}
+
+.mega-featured {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 100%;
+}
+
+.mega-featured img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mega-featured-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: var(--light);
+}
+
+.mega-featured-content h4 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.nav-item:hover .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.btn-search {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.btn-search:hover {
+    color: var(--secondary);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    width: 30px;
+    gap: 6px;
+    z-index: 1010;
+}
+
+.menu-toggle span {
+    height: 2px;
+    width: 100%;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 2.4rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 1.6rem;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+.btn-primary:hover {
+    background-color: #002266;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary);
+    color: var(--light);
+}
+
+.btn-secondary:hover {
+    background-color: #0095d6;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary);
+    color: var(--light);
+    transform: translateY(-2px);
+}
+
+.btn-outline-light {
+    background-color: transparent;
+    color: var(--light);
+    border: 1px solid var(--light);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--light);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.btn-outline-dark {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 1.5rem 3rem;
+}
+
+.btn-outline-dark:hover {
+    background-color: var(--primary);
+    color: var(--light);
+    transform: translateY(-2px);
+}
+
+.btn-text {
+    color: var(--secondary);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-text i {
+    transition: var(--transition);
+}
+
+.btn-text:hover {
+    color: var(--primary);
+}
+
+.btn-text:hover i {
+    transform: translateX(5px);
+}
+
+.btn-outline-sm, .btn-primary-sm {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.4rem;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-float {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 1.2rem 2.4rem;
+    border-radius: 5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 99;
+    transition: var(--transition);
+}
+
+.btn-float:hover {
+    background-color: var(--secondary);
+    transform: translateY(-5px);
+}
+
+.btn-float i {
+    font-size: 1.8rem;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 60rem;
+    display: flex;
+    align-items: center;
+    color: var(--light);
+    overflow: hidden;
+    margin-top: 8rem;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 23, 61, 0.8), rgba(0, 0, 0, 0.4));
+    z-index: 1;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 65rem;
+    padding: 0 2rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-content h1 {
+    font-size: 5.6rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+.hero-content p {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    max-width: 55rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* ===== FEATURED CARS SECTION ===== */
+.featured-cars {
+    padding: 10rem 0;
+    background-color: var(--light);
+}
+
+.car-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 4rem;
+}
+
+.filter-btn {
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--gray-dark);
+    background-color: var(--gray);
+    transition: var(--transition);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-bottom: 5rem;
+}
+
+.car-card {
+    background-color: var(--light);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.car-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.car-image {
+    position: relative;
+    height: 18rem;
+    overflow: hidden;
+}
+
+.car-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.car-card:hover .car-image img {
+    transform: scale(1.05);
+}
+
+.car-type {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.car-card h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 2rem 2rem 1.5rem;
+    color: var(--primary);
+}
+
+.car-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 2rem 1.5rem;
+    gap: 1rem;
+}
+
+.spec {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+}
+
+.spec span {
+    color: var(--gray-dark);
+}
+
+.spec strong {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.car-price {
+    padding: 0 2rem 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--accent);
+}
+
+.car-actions {
+    display: flex;
+    padding: 0 2rem 2rem;
+    gap: 1rem;
+}
+
+.car-actions a {
+    flex: 1;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.view-all-cars {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+/* ===== EQ SECTION ===== */
+.eq-section {
+    padding: 10rem 0;
+    background-color: var(--gray);
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1.5rem;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 1.5rem;
+}
+
+.content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-col h2 {
+    font-size: 3.6rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--primary);
+}
+
+.content-col p {
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+    color: var(--dark);
+}
+
+.image-col img {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* ===== BUY SECTION ===== */
+.buy-section {
+    position: relative;
+    height: 50rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: url('https://www.mercedes-benz.com.vn/content/vietnam/en/passengercars/mercedes-benz-cars/models/s-class/_jcr_content/root/responsivegrid/simple_teaser_115569.component.damq2.3362939832266.jpg/mercedes-benz-s-class-exterior-3840x1707.jpg') center/cover no-repeat;
+}
+
+.buy-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,23,61,0.8) 0%, rgba(0,23,61,0.4) 100%);
+}
+
+.buy-content {
+    position: relative;
+    color: var(--light);
+    max-width: 50rem;
+    padding: 0 2rem;
+}
+
+.buy-content h2 {
+    font-size: 4rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}
+
+.buy-content p {
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+}
+
+/* ===== TECHNOLOGY SECTION ===== */
+.tech-section {
+    padding: 10rem 0;
+    background-color: var(--light);
+}
+
+.tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5rem;
+    gap: 3rem;
+}
+
+.tech-card {
+    flex: 1;
+    min-width: 25rem;
+    background-color: var(--gray);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    transition: var(--transition);
+}
+
+.tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.tech-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.tech-card h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.tech-card p {
+    color: var(--gray-dark);
+    font-size: 1.5rem;
+}
+
+.tech-detail {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 5rem;
+}
+
+.tech-info {
+    flex: 1;
+}
+
+.tech-info h3 {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--primary);
+}
+
+.tech-info p {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: var(--gray-dark);
+}
+
+.tech-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tech-feature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tech-feature i {
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+.tech-image {
+    flex: 1;
+}
+
+.tech-image img {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* ===== OWNERS SECTION ===== */
+.owners-section {
+    padding: 10rem 0;
+    background-color: var(--gray);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 3rem;
+}
+
+.benefit-card {
+    background-color: var(--light);
+    border-radius: var(--radius);
+    padding: 3rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 3.5rem;
+    color: var(--primary);
+    margin-bottom: 2rem;
+}
+
+.benefit-card h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.benefit-card p {
+    color: var(--gray-dark);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.btn-text {
+    color: var(--secondary);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.btn-text:hover {
+    color: var(--primary);
+}
+
+.btn-text i {
+    transition: transform 0.3s ease;
+}
+
+.btn-text:hover i {
+    transform: translateX(5px);
+}
+
+/* ===== NEWS SECTION ===== */
+.news-section {
+    padding: 10rem 0;
+    background-color: var(--light);
+}
+
+.news-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.news-card {
+    background-color: var(--light);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-image {
+    position: relative;
+    height: 22rem;
+    overflow: hidden;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.05);
+}
+
+.news-date {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 1rem;
+    text-align: center;
+}
+
+.day {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.month {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.news-content {
+    padding: 2.5rem;
+}
